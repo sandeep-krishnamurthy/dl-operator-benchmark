@@ -5,6 +5,7 @@ A Python framework for doing benchmarking for individual operators in Apache MXN
 
 1. Individual operator level benchmarks to capture - time for operator execution (speed), memory usage.
 2. Fine grained individual operator level benchmarks to capture - time for forward pass, time for backward pass.
+3. Benchmarks for commonly fused operators. Ex: Conv + Relu, Conv + BatchNorm.
 3. Benchmarks for Apache MXNet operators. (Support for PyTorch coming soon).
 4. Benchmarks for operators with varying inputs to uncover any performance issues due to skewed input data. Ex: Measuring operator performance on small input tensors, large input tensors along with average normally used tensor sizes.
 

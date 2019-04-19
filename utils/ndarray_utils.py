@@ -60,7 +60,7 @@ def get_mx_ndarray(ctx, in_tensor, dtype, initializer, attach_grad=True):
     if isinstance(in_tensor, tuple):
         tensor = initializer(ctx=ctx, shape=in_tensor, dtype=dtype)
     elif isinstance(in_tensor, np.ndarray):
-        tensor = mx.nd.array(in_tensor, ctx=ctx, dtype=dtype)
+        tensor = nd.array(in_tensor, ctx=ctx, dtype=dtype)
     elif isinstance(in_tensor, mx.ndarray):
         tensor = in_tensor.as_in_context(ctx=ctx).astype(dtype=dtype)
 

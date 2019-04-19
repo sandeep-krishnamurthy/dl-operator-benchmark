@@ -37,7 +37,7 @@ class Add(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"lhs": (1024, 1024),
                       "rhs": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -74,7 +74,7 @@ class Subtract(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"lhs": (1024, 1024),
                       "rhs": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -111,7 +111,7 @@ class Multiply(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"lhs": (1024, 1024),
                       "rhs": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -148,7 +148,7 @@ class Divide(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"lhs": (1024, 1024),
                       "rhs": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -185,7 +185,7 @@ class Modulo(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"lhs": (1024, 1024),
                       "rhs": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -221,7 +221,7 @@ class Power(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"base": (1024, 1024),
                       "exp": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -256,7 +256,7 @@ class Negative(MXNetOperatorBenchmarkBase):
         # Set the default Inputs
         if inputs is None:
             inputs = {"data": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -290,7 +290,7 @@ class IAdd(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"this": (1024, 1024),
                       "other": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": False,
                       "dtype": "float32"}
 
@@ -328,7 +328,7 @@ class ISub(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"this": (1024, 1024),
                       "other": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": False,
                       "dtype": "float32"}
 
@@ -366,7 +366,7 @@ class IMul(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"this": (1024, 1024),
                       "other": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": False,
                       "dtype": "float32"}
 
@@ -404,7 +404,7 @@ class IDiv(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"this": (1024, 1024),
                       "other": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": False,
                       "dtype": "float32"}
 
@@ -442,7 +442,7 @@ class IMod(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"this": (1024, 1024),
                       "other": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": False,
                       "dtype": "float32"}
 

@@ -33,7 +33,7 @@ class Lesser(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"lhs": (1024, 1024),
                       "rhs": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -71,7 +71,7 @@ class LesserEqual(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"lhs": (1024, 1024),
                       "rhs": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -109,7 +109,7 @@ class Greater(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"lhs": (1024, 1024),
                       "rhs": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -147,7 +147,7 @@ class GreaterEqual(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"lhs": (1024, 1024),
                       "rhs": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -185,7 +185,7 @@ class Equal(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"lhs": (1024, 1024),
                       "rhs": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -223,7 +223,7 @@ class NotEqual(MXNetOperatorBenchmarkBase):
         if inputs is None:
             inputs = {"lhs": (1024, 1024),
                       "rhs": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 

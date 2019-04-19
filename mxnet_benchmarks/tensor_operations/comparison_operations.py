@@ -2,7 +2,7 @@ import mxnet as mx
 import mxnet.ndarray as nd
 
 from mxnet_benchmarks.MXNetOperatorBenchmark import MXNetOperatorBenchmarkBase
-from utils.ndarray_utils import get_mx_ndarray, nd_forward_backward_and_time
+from mxnet_benchmarks.utils.ndarray_utils import get_mx_ndarray, nd_forward_backward_and_time
 
 """Performance benchmark tests for MXNet NDArray Comparison Operations
 1. lesser

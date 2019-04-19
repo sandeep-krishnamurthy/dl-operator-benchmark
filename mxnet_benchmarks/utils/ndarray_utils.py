@@ -2,21 +2,21 @@ import numpy as np
 import mxnet as mx
 import mxnet.ndarray as nd
 
-from .profiler_utils import timer
+from utils.profiler_utils import timer
 
 
 @timer
 def nd_forward_backward_and_time(F, runs, *args, **kwargs):
-    """Helper function to run a given NDArray operator (F) for runs number of times with
+    """Helper function to run a given NDArray operator (F) for 'runs' number of times with
     given args and kwargs. Executes both forward and backward pass.
 
     NOTE: This is a sync call and waits for all the operations execution to complete.
 
-    :param F: NDArray operator (Function feference) to execute. Example: mx.nd.add
-    :param runs: Number of time to execute the operation
+    :param F: NDArray operator (Function reference) to execute. Example: mx.nd.add
+    :param runs: Number of times to execute the operation
     :param args: Arguments for the NDArray operator (F) being executed.
     :param kwargs: Key value arguments for the NDArray operator (F) being executed.
-    :return: Total execution time in seconds, any results from NDArray operation execution.
+    :return: Tuple of (Total execution time in seconds, any results from NDArray operation execution)
     """
     for _ in range(runs):
         with mx.autograd.record():
@@ -27,7 +27,7 @@ def nd_forward_backward_and_time(F, runs, *args, **kwargs):
 
 @timer
 def nd_forward_and_time(F, runs, *args, **kwargs):
-    """Helper function to run a given NDArray operator (F) for runs number of times with
+    """Helper function to run a given NDArray operator (F) for 'runs' number of times with
     given args and kwargs. Executes ONLY forward pass.
 
     NOTE: This is a sync call and waits for all the operations execution to complete.
@@ -36,7 +36,7 @@ def nd_forward_and_time(F, runs, *args, **kwargs):
     :param runs: Number of time to execute the operation
     :param args: Arguments for the NDArray operator (F) being executed.
     :param kwargs: Key value arguments for the NDArray operator (F) being executed.
-    :return: Total execution time in seconds, any results from NDArray operation execution.
+    :return: Tuple(Total execution time in seconds, any results from NDArray operation execution)
     """
     for _ in range(runs):
         F(*args, **kwargs)

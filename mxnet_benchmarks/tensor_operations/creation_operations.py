@@ -2,7 +2,7 @@ import mxnet as mx
 import mxnet.ndarray as nd
 
 from mxnet_benchmarks.MXNetOperatorBenchmark import MXNetOperatorBenchmarkBase
-from utils.ndarray_utils import nd_forward_and_time, get_mx_ndarray
+from mxnet_benchmarks.utils.ndarray_utils import nd_forward_and_time, get_mx_ndarray
 
 """ Performance benchmark tests for MXNet NDArray Creation Operations
 1. Zeros

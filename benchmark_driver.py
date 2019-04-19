@@ -3,6 +3,9 @@ from mxnet_benchmarks.tensor_operations.arithmetic_operations import run_all_ari
 from mxnet_benchmarks.tensor_operations.comparison_operations import run_all_comparison_operations_benchmarks
 from mxnet_benchmarks.tensor_operations.exp_and_log_operations import run_all_exponential_and_log_operations_benchmarks
 
+from mxnet_benchmarks.nn_operations.basic_operations import run_all_gluon_nn_basic_operations_benchmarks
+
+
 """Driver program to kick off benchmark tasks.
 
 TODO
@@ -10,6 +13,8 @@ TODO
 2. Run benchmarks for various input type and size combination. Below for illustration purpose we use default benchmarks.
 3. Logging and other useful information.
 """
+
+#        MXNET TENSOR OPERATOR BENCHMARKS        #
 
 # Run all Tensor creation operations benchmarks with default input values
 run_all_tensor_creation_operations_benchmarks()
@@ -22,3 +27,9 @@ run_all_comparison_operations_benchmarks()
 
 # Run all Exp and Log operations benchmarks with default input values
 run_all_exponential_and_log_operations_benchmarks()
+
+
+#       MXNET GLUON NN LAYERS BENCHMARKS        #
+
+# Run all Gluon NN Basic Layers operations benchmarks with default input values
+run_all_gluon_nn_basic_operations_benchmarks()

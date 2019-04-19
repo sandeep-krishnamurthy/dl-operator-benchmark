@@ -26,7 +26,7 @@ class Log(MXNetOperatorBenchmarkBase):
         # Set the default Inputs
         if inputs is None:
             inputs = {"data": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -59,7 +59,7 @@ class Exp(MXNetOperatorBenchmarkBase):
         # Set the default Inputs
         if inputs is None:
             inputs = {"data": (1024, 1024),
-                      "initializer": mx.nd.normal,
+                      "initializer": nd.normal,
                       "run_backward": True,
                       "dtype": "float32"}
 

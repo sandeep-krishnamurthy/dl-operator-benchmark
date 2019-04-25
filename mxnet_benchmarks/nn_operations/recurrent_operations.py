@@ -72,6 +72,55 @@ class RNN(MXNetOperatorBenchmarkBase):
         self.results["MX_Gluon_Imperative_RNN_Forward_Backward_Time"] = exe_time / self.runs
 
 
+class LSTM(MXNetOperatorBenchmarkBase):
+    """Helps to benchmark Gluon LSTM Block.
+
+    By default, benchmarks both forward and backward pass on the LSTM block with 100 hidden units, 1 layer,
+    input in TNC layout and (25, 32, 256) shape, no dropout, single directional LSTM operation.
+
+    By default run on 'float32' precision.
+
+    """
+
+    def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
+        # Set the default Inputs
+        if inputs is None:
+            inputs = {"data": (25, 32, 256),
+                      "data_initializer": nd.normal,
+                      "hidden_size": 100,
+                      "num_layers": 1,
+                      "layout": "TNC",
+                      "dropout": 0,
+                      "bidirectional": False,
+                      "run_backward": True,
+                      "dtype": "float32"}
+
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+
+        self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
+                                   dtype=self.inputs["dtype"],
+                                   initializer=self.inputs["data_initializer"],
+                                   attach_grad=self.inputs["run_backward"])
+
+        self.block = rnn.LSTM(hidden_size=self.inputs["hidden_size"],
+                              num_layers=self.inputs["num_layers"],
+                              layout=self.inputs["layout"],
+                              dropout=self.inputs["dropout"],
+                              bidirectional=self.inputs["bidirectional"],
+                              dtype=self.inputs["dtype"])
+
+        self.block.initialize(ctx=self.ctx)
+
+    def run_benchmark(self):
+        # Warm up, ignore execution time value
+        _, _ = block_forward_backward_and_time(block=self.block, runs=self.warmup, x=self.data)
+
+        # Run Benchmarks
+        exe_time, _ = block_forward_backward_and_time(block=self.block, runs=self.runs, x=self.data)
+
+        self.results["MX_Gluon_Imperative_LSTM_Forward_Backward_Time"] = exe_time / self.runs
+
+
 # Utilities
 def run_all_gluon_recurrent_operations_benchmarks():
     """Helper to run all Gluon Recurrent Layers benchmarks. Just runs the benchmarks with default input values.
@@ -80,6 +129,10 @@ def run_all_gluon_recurrent_operations_benchmarks():
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
     benchmark_ref = RNN()
+    benchmark_ref.run_benchmark()
+    benchmark_ref.print_benchmark_results()
+
+    benchmark_ref = LSTM()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
 

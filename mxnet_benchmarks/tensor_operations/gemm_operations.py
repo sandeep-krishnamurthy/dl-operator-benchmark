@@ -36,6 +36,7 @@ class Dot(MXNetOperatorBenchmarkBase):
                       "initializer": nd.normal,
                       "transpose_a": False,
                       "transpose_b": False,
+                      "forward_stype": None,
                       "run_backward": True,
                       "dtype": "float32"}
 
@@ -54,14 +55,65 @@ class Dot(MXNetOperatorBenchmarkBase):
         # Warm up, ignore execution time value
         _, _ = nd_forward_backward_and_time(F=nd.dot, runs=self.warmup, lhs=self.lhs, rhs=self.rhs,
                                             transpose_a=self.inputs["transpose_a"],
-                                            transpose_b=self.inputs["transpose_b"])
+                                            transpose_b=self.inputs["transpose_b"],
+                                            forward_stype=self.inputs["forward_stype"])
 
         # Run Benchmarks
         exe_time, _ = nd_forward_backward_and_time(F=nd.dot, runs=self.runs, lhs=self.lhs, rhs=self.rhs,
                                                    transpose_a=self.inputs["transpose_a"],
-                                                   transpose_b=self.inputs["transpose_b"])
+                                                   transpose_b=self.inputs["transpose_b"],
+                                                   forward_stype=self.inputs["forward_stype"])
 
         self.results["MX_Dot_Forward_Backward_Time"] = exe_time / self.runs
+
+
+class BatchDot(MXNetOperatorBenchmarkBase):
+    """Helps to Benchmark Tensor BatchDot operation.
+
+    By default benchmark both forward and backward BatchDot operation on Tensor of shape (32, 1024, 1024) and
+    Tensor of shape (32, 1024, 1000). By default, Tensors are dense and of
+    precision - 'float32'. This defaults are choosen to mimic a last dense layer of a 1000 class classification network
+    and a batch size of 32.
+
+    """
+
+    def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
+        # Set the default Inputs
+        if inputs is None:
+            inputs = {"lhs": (32, 1024, 1024),
+                      "rhs": (32, 1024, 1000),
+                      "initializer": nd.normal,
+                      "transpose_a": False,
+                      "transpose_b": False,
+                      "forward_stype": None,
+                      "run_backward": True,
+                      "dtype": "float32"}
+
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+
+        self.lhs = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["lhs"],
+                                  dtype=self.inputs["dtype"],
+                                  initializer=self.inputs["initializer"],
+                                  attach_grad=self.inputs["run_backward"])
+        self.rhs = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["rhs"],
+                                  dtype=self.inputs["dtype"],
+                                  initializer=self.inputs["initializer"],
+                                  attach_grad=self.inputs["run_backward"])
+
+    def run_benchmark(self):
+        # Warm up, ignore execution time value
+        _, _ = nd_forward_backward_and_time(F=nd.batch_dot, runs=self.warmup, lhs=self.lhs, rhs=self.rhs,
+                                            transpose_a=self.inputs["transpose_a"],
+                                            transpose_b=self.inputs["transpose_b"],
+                                            forward_stype=self.inputs["forward_stype"])
+
+        # Run Benchmarks
+        exe_time, _ = nd_forward_backward_and_time(F=nd.batch_dot, runs=self.runs, lhs=self.lhs, rhs=self.rhs,
+                                                   transpose_a=self.inputs["transpose_a"],
+                                                   transpose_b=self.inputs["transpose_b"],
+                                                   forward_stype=self.inputs["forward_stype"])
+
+        self.results["MX_Batch_Dot_Forward_Backward_Time"] = exe_time / self.runs
 
 
 # Utilities
@@ -75,5 +127,6 @@ def run_all_gemm_operations_benchmarks():
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
 
-
-run_all_gemm_operations_benchmarks()
+    benchmark_ref = BatchDot()
+    benchmark_ref.run_benchmark()
+    benchmark_ref.print_benchmark_results()

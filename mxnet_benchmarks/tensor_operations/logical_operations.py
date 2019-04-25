@@ -53,7 +53,7 @@ class LogicalAnd(MXNetOperatorBenchmarkBase):
         # Run Benchmarks
         exe_time, _ = nd_forward_backward_and_time(F=nd.logical_and, runs=self.runs, lhs=self.lhs, rhs=self.rhs)
 
-        self.results["MX_LogicalAnd_Forward_Backward_Time"] = exe_time / self.runs
+        self.results["MX_Logical_And_Forward_Backward_Time"] = exe_time / self.runs
 
 
 class LogicalOr(MXNetOperatorBenchmarkBase):
@@ -91,7 +91,7 @@ class LogicalOr(MXNetOperatorBenchmarkBase):
         # Run Benchmarks
         exe_time, _ = nd_forward_backward_and_time(F=nd.logical_or, runs=self.runs, lhs=self.lhs, rhs=self.rhs)
 
-        self.results["MX_LogicalOr_Forward_Backward_Time"] = exe_time / self.runs
+        self.results["MX_Logical_Or_Forward_Backward_Time"] = exe_time / self.runs
 
 
 class LogicalXor(MXNetOperatorBenchmarkBase):
@@ -129,7 +129,7 @@ class LogicalXor(MXNetOperatorBenchmarkBase):
         # Run Benchmarks
         exe_time, _ = nd_forward_backward_and_time(F=nd.logical_xor, runs=self.runs, lhs=self.lhs, rhs=self.rhs)
 
-        self.results["MX_LogicalXor_Forward_Backward_Time"] = exe_time / self.runs
+        self.results["MX_Logical_Xor_Forward_Backward_Time"] = exe_time / self.runs
 
 
 class LogicalNot(MXNetOperatorBenchmarkBase):
@@ -162,7 +162,7 @@ class LogicalNot(MXNetOperatorBenchmarkBase):
         # Run Benchmarks
         exe_time, _ = nd_forward_backward_and_time(F=nd.logical_not, runs=self.runs, data=self.data)
 
-        self.results["MX_LogicalNot_Forward_Backward_Time"] = exe_time / self.runs
+        self.results["MX_Logical_Not_Forward_Backward_Time"] = exe_time / self.runs
 
 
 # Utilities

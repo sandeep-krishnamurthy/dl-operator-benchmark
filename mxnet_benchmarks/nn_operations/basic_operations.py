@@ -29,7 +29,7 @@ class Dense(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
-        # Default data is (1, 1024) to mimimic an input of batch_size=1 and a sample image of size 512*512.
+        # Default data is (1, 1024) to mimic an input of batch_size=1 and a sample image of size 512*512.
         # Default number of units 256 is referred from ResNet architecture as commonly used Dense Layer size.
         # Default activation is None because we want to benchmark just dense layer operation.
         if inputs is None:
@@ -71,6 +71,44 @@ class Dense(MXNetOperatorBenchmarkBase):
         self.results["MX_Gluon_Imperative_Dense_Forward_Backward_Time"] = exe_time / self.runs
 
 
+class Flatten(MXNetOperatorBenchmarkBase):
+    """Helps to benchmark Gluon Flatten Block.
+
+    By default, benchmarks both forward and backward pass on the Flatten block on (128, 512, 512) input with
+    'float32' precision.
+
+    """
+
+    def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
+        # Set the default Inputs.
+        # Default data is (128, 512, 512) to mimic an input of batch_size=128 and a sample image of size 512*512.
+        if inputs is None:
+            inputs = {"data": (128, 512, 512),
+                      "data_initializer": nd.normal,
+                      "run_backward": True,
+                      "dtype": "float32"}
+
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+
+        self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
+                                   dtype=self.inputs["dtype"],
+                                   initializer=self.inputs["data_initializer"],
+                                   attach_grad=self.inputs["run_backward"])
+
+        self.block = nn.Flatten()
+
+        self.block.initialize(ctx=self.ctx)
+
+    def run_benchmark(self):
+        # Warm up, ignore execution time value
+        _, _ = block_forward_backward_and_time(block=self.block, runs=self.warmup, x=self.data)
+
+        # Run Benchmarks
+        exe_time, _ = block_forward_backward_and_time(block=self.block, runs=self.runs, x=self.data)
+
+        self.results["MX_Gluon_Imperative_Flatten_Forward_Backward_Time"] = exe_time / self.runs
+
+
 # Utilities
 def run_all_gluon_nn_basic_operations_benchmarks():
     """Helper to run all Gluon Basic NN Layer benchmarks. Just runs the benchmarks with default input values.
@@ -79,6 +117,10 @@ def run_all_gluon_nn_basic_operations_benchmarks():
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
     benchmark_ref = Dense()
+    benchmark_ref.run_benchmark()
+    benchmark_ref.print_benchmark_results()
+
+    benchmark_ref = Flatten()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
 

@@ -11,13 +11,13 @@ from mxnet_benchmarks.utils.ndarray_utils import get_mx_ndarray
 2. L2Loss
 3. SigmoidBinaryCrossEntropyLoss
 4. SoftmaxCrossEntropyLoss
-5. KLDivLoss
-6. HuberLoss
-7. HingeLoss
-8. SquaredHingeLoss
-9. LogisticLoss
-10. TripletLoss
-11. CTCLoss
+5. KLDivLoss (TODO)
+6. HuberLoss (TODO)
+7. HingeLoss (TODO)
+8. SquaredHingeLoss (TODO)
+9. LogisticLoss (TODO)
+10. TripletLoss (TODO)
+11. CTCLoss (TODO)
 """
 
 
@@ -241,6 +241,3 @@ def run_all_gluon_nn_loss_operations_benchmarks():
     benchmark_ref = SoftmaxCrossEntropyLoss()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
-
-
-run_all_gluon_nn_loss_operations_benchmarks()

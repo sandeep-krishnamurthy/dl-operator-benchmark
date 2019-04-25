@@ -1,6 +1,7 @@
 from mxnet_benchmarks.tensor_operations.creation_operations import run_all_tensor_creation_operations_benchmarks
 from mxnet_benchmarks.tensor_operations.arithmetic_operations import run_all_arithmetic_operations_benchmarks
 from mxnet_benchmarks.tensor_operations.comparison_operations import run_all_comparison_operations_benchmarks
+from mxnet_benchmarks.tensor_operations.logical_operations import run_all_logical_comparison_operations_benchmarks
 from mxnet_benchmarks.tensor_operations.exp_and_log_operations import run_all_exponential_and_log_operations_benchmarks
 
 from mxnet_benchmarks.nn_operations.basic_operations import run_all_gluon_nn_basic_operations_benchmarks
@@ -31,6 +32,9 @@ run_all_arithmetic_operations_benchmarks()
 
 # Run all Comparison operations benchmarks with default input values
 run_all_comparison_operations_benchmarks()
+
+# Run all Logical Comparison operations benchmarks with default input values
+run_all_logical_comparison_operations_benchmarks()
 
 # Run all Exp and Log operations benchmarks with default input values
 run_all_exponential_and_log_operations_benchmarks()

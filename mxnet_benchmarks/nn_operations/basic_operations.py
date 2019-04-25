@@ -109,6 +109,50 @@ class Flatten(MXNetOperatorBenchmarkBase):
         self.results["MX_Gluon_Imperative_Flatten_Forward_Backward_Time"] = exe_time / self.runs
 
 
+class Lambda(MXNetOperatorBenchmarkBase):
+    """Helps to benchmark Gluon Lambda Block.
+
+    By default, benchmarks both forward and backward pass on the Lambda block that does batchification under the hood
+    using NDArray expand_dims operator. By default, expands an NDArray of shape (3, 1024, 1024) to (1, 3, 1024, 1024).
+    Uses 'float32' precision by default.
+
+    """
+
+    def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
+        # Set the default Inputs.
+        # Default data is (3, 512, 512) to mimic an input image of size 512*512 with 3 channels.
+        if inputs is None:
+            inputs = {"data": (128, 512, 512),
+                      "data_initializer": nd.normal,
+                      "run_backward": True,
+                      "dtype": "float32"}
+
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+
+        self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
+                                   dtype=self.inputs["dtype"],
+                                   initializer=self.inputs["data_initializer"],
+                                   attach_grad=self.inputs["run_backward"])
+
+        # Batchify the input data. (3, 1024, 1024) => (1, 3, 1024, 1024)
+        self.block = nn.Lambda(lambda x: nd.expand_dims(data=x, axis=0))
+
+        self.block.initialize(ctx=self.ctx)
+
+    def run_benchmark(self):
+        # NOTE: Below we are calling as (self.data, block...) purposefully.
+        # Because, Lambda(..) block DO NOT take a named input and we can't call
+        # block_forward_backward_and_time(..) with unnamed parameter self.data at the end.
+
+        # Warm up, ignore execution time value
+        _, _ = block_forward_backward_and_time(self.data, block=self.block, runs=self.warmup)
+
+        # Run Benchmarks
+        exe_time, _ = block_forward_backward_and_time(self.data, block=self.block, runs=self.runs)
+
+        self.results["MX_Gluon_Imperative_Lambda_Batchify_Forward_Backward_Time"] = exe_time / self.runs
+
+
 # Utilities
 def run_all_gluon_nn_basic_operations_benchmarks():
     """Helper to run all Gluon Basic NN Layer benchmarks. Just runs the benchmarks with default input values.
@@ -121,6 +165,10 @@ def run_all_gluon_nn_basic_operations_benchmarks():
     benchmark_ref.print_benchmark_results()
 
     benchmark_ref = Flatten()
+    benchmark_ref.run_benchmark()
+    benchmark_ref.print_benchmark_results()
+
+    benchmark_ref = Lambda()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
 

@@ -24,7 +24,7 @@ class Dropout(MXNetOperatorBenchmarkBase):
         # Set the default Inputs.
         # Default data is (32, 3, 256, 256) with rate=0.5
         if inputs is None:
-            inputs = {"data": (32, 3, 1),
+            inputs = {"data": (32, 3, 256, 256),
                       "data_initializer": nd.normal,
                       "rate": 0.5,
                       "run_backward": True,
@@ -52,6 +52,46 @@ class Dropout(MXNetOperatorBenchmarkBase):
         self.results["MX_Gluon_Imperative_Dropout_Forward_Backward_Time"] = exe_time / self.runs
 
 
+class BatchNorm(MXNetOperatorBenchmarkBase):
+    """Helps to benchmark Gluon BatchNorm Block.
+
+    By default, benchmarks both forward and backward pass on the BatchNorm block using an input tensor of shape
+    (32, 3, 256, 256) using 'float32' precision. Uses default momentum(0.9), epsilon(1e-05) with center and scale
+    set to True.
+
+    """
+
+    def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
+        # Set the default Inputs.
+        # Default data is (32, 3, 256, 256)
+        if inputs is None:
+            inputs = {"data": (32, 3, 256, 256),
+                      "data_initializer": nd.normal,
+                      "run_backward": True,
+                      "dtype": "float32"}
+
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+
+        # Create a random prediction and label tensor
+        self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
+                                   dtype=self.inputs["dtype"],
+                                   initializer=self.inputs["data_initializer"],
+                                   attach_grad=self.inputs["run_backward"])
+
+        self.block = nn.BatchNorm()
+
+        self.block.initialize(ctx=self.ctx)
+
+    def run_benchmark(self):
+        # Warm up, ignore execution time value
+        _, _ = block_forward_backward_and_time(block=self.block, runs=self.warmup, x=self.data)
+
+        # Run Benchmarks
+        exe_time, _ = block_forward_backward_and_time(block=self.block, runs=self.runs, x=self.data)
+
+        self.results["MX_Gluon_Imperative_BatchNorm_Forward_Backward_Time"] = exe_time / self.runs
+
+
 # Utilities
 def run_all_gluon_normalization_operations_benchmarks():
     """Helper to run all Gluon Normalization Layer benchmarks. Just runs the benchmarks with default input values.
@@ -63,5 +103,6 @@ def run_all_gluon_normalization_operations_benchmarks():
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
 
-
-run_all_gluon_normalization_operations_benchmarks()
+    benchmark_ref = BatchNorm()
+    benchmark_ref.run_benchmark()
+    benchmark_ref.print_benchmark_results()

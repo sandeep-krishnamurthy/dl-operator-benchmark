@@ -6,6 +6,7 @@ from mxnet_benchmarks.tensor_operations.exp_and_log_operations import run_all_ex
 from mxnet_benchmarks.nn_operations.basic_operations import run_all_gluon_nn_basic_operations_benchmarks
 from mxnet_benchmarks.nn_operations.activation_operations import run_all_gluon_nn_activation_operations_benchmarks
 from mxnet_benchmarks.nn_operations.loss_operations import run_all_gluon_nn_loss_operations_benchmarks
+from mxnet_benchmarks.nn_operations.normalization_operations import run_all_gluon_normalization_operations_benchmarks
 
 """Driver program to kick off benchmark tasks.
 
@@ -29,7 +30,6 @@ run_all_comparison_operations_benchmarks()
 # Run all Exp and Log operations benchmarks with default input values
 run_all_exponential_and_log_operations_benchmarks()
 
-
 #       MXNET GLUON NN LAYERS BENCHMARKS        #
 
 # Run all Gluon NN Basic Layers operations benchmarks with default input values
@@ -40,3 +40,6 @@ run_all_gluon_nn_activation_operations_benchmarks()
 
 # Run all Gluon Loss Layers operations benchmarks with default input values
 run_all_gluon_nn_loss_operations_benchmarks()
+
+# Run all Gluon Normalization Layers operations benchmarks with default input values
+run_all_gluon_normalization_operations_benchmarks

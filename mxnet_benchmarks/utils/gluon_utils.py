@@ -23,3 +23,23 @@ def block_forward_backward_and_time(*args, block, runs, **kwargs):
             res = block.forward(*args, **kwargs)
         res.backward()
         nd.waitall()
+
+
+@timer
+def block_forward_and_time(*args, block, runs, **kwargs):
+    """Helper function to run a given Block (block) for 'runs' number of times with
+    given args and kwargs. Executes forward pass only.
+
+    NOTE: This is a sync call and waits for all the operations execution to complete.
+
+    :param block: Gluon block to execute. Example: an instance of gluon.nn.Dense(...)
+    :param runs: Number of times to execute the block operation
+    :param args: Arguments for the block being executed.
+    :param kwargs: Key value arguments for the block being executed.
+    :return: Tuple of (Total execution time in seconds, any results from block execution)
+    """
+
+    for _ in range(runs):
+        # Imperative Mode. This is block forward function
+        block.hybrid_forward(F=nd, *args, **kwargs)
+        nd.waitall()

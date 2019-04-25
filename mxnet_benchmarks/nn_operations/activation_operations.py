@@ -357,7 +357,7 @@ class Swish(MXNetOperatorBenchmarkBase):
 
 
 # Utilities
-def run_all_gluon_nn_basic_operations_benchmarks():
+def run_all_gluon_nn_activation_operations_benchmarks():
     """Helper to run all Gluon Activation Layer benchmarks. Just runs the benchmarks with default input values.
     This just a utility to run benchmarks with all default input values.
 
@@ -398,5 +398,3 @@ def run_all_gluon_nn_basic_operations_benchmarks():
     benchmark_ref = Swish()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
-
-run_all_gluon_nn_basic_operations_benchmarks()

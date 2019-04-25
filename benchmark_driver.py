@@ -9,6 +9,9 @@ from mxnet_benchmarks.nn_operations.loss_operations import run_all_gluon_nn_loss
 from mxnet_benchmarks.nn_operations.normalization_operations import run_all_gluon_normalization_operations_benchmarks
 from mxnet_benchmarks.nn_operations.convolution_operations import run_all_gluon_nn_convolution_operations_benchmarks
 from mxnet_benchmarks.nn_operations.pooling_operations import run_all_gluon_nn_pooling_operations_benchmarks
+from mxnet_benchmarks.nn_operations.recurrent_operations import run_all_gluon_recurrent_operations_benchmarks
+
+from mxnet_benchmarks.custom_operations.custom_operations import run_customop_operations_benchmarks
 
 """Driver program to kick off benchmark tasks.
 
@@ -51,3 +54,9 @@ run_all_gluon_nn_convolution_operations_benchmarks()
 
 # Run all Gluon Pooling Layers operations benchmarks with default input values
 run_all_gluon_nn_pooling_operations_benchmarks()
+
+# Run all Gluon Recurrent Layers operations benchmarks with default input values
+run_all_gluon_recurrent_operations_benchmarks()
+
+# Run MXNet Custom Op Benchmarks with default input values
+run_customop_operations_benchmarks()

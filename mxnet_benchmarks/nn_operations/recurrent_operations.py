@@ -188,6 +188,3 @@ def run_all_gluon_recurrent_operations_benchmarks():
     benchmark_ref = GRU()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
-
-
-run_all_gluon_recurrent_operations_benchmarks()

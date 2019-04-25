@@ -59,6 +59,23 @@ run_all_arithmetic_operations_benchmarks()
 
 ```
 
+Output for the above benchmark run, on a CPU machine, would look something like below:
+
+```
+MX_Add_Forward_Backward_Time - 0.015201 seconds
+MX_Multiply_Forward_Backward_Time - 0.021678 seconds
+MX_Subtract_Forward_Backward_Time - 0.016154 seconds
+MX_Divide_Forward_Backward_Time - 0.024327 seconds
+MX_Modulo_Forward_Backward_Time - 0.045726 seconds
+MX_Power_Forward_Backward_Time - 0.077152 seconds
+MX_Negative_Forward_Backward_Time - 0.014472 seconds
+MX_Inplace_Add_Forward_Time - 0.003824 seconds
+MX_Inplace_Subtract_Forward_Time - 0.004137 seconds
+MX_Inplace_Multiply_Forward_Time - 0.006589 seconds
+MX_Inplace_Division_Forward_Time - 0.003869 seconds
+MX_Inplace_Modulo_Forward_Time - 0.018180 seconds
+```
+
 ### Run benchmarks for specific operator
 
 For example, you want to run benchmarks for `Addition` operator, you just run the following python script.
@@ -72,4 +89,10 @@ add_benchmark = Add()
 add_benchmark.run_benchmark()
 add_benchmark.print_benchmark_results()
 
+```
+
+Output for the above benchmark run, on a CPU machine, would look something like below:
+
+```
+MX_Add_Forward_Backward_Time - 0.015201 seconds
 ```

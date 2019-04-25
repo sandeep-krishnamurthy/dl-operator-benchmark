@@ -198,6 +198,154 @@ class AvgPool2D(MXNetOperatorBenchmarkBase):
         self.results["MX_Gluon_Imperative_AvgPool2D_Forward_Backward_Time"] = exe_time / self.runs
 
 
+class GlobalMaxPool1D(MXNetOperatorBenchmarkBase):
+    """Helps to benchmark Gluon GlobalMaxPool1D Block.
+
+    By default, benchmarks both forward and backward pass on the GlobalMaxPool1D block with layout (N, C, W)
+    on input of shape (32, 3, 256). By default run on 'float32' precision.
+
+    """
+
+    def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
+        # Set the default Inputs
+        if inputs is None:
+            inputs = {"data": (32, 3, 256),
+                      "data_initializer": nd.normal,
+                      "layout": "NCW",
+                      "run_backward": True,
+                      "dtype": "float32"}
+
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+
+        self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
+                                   dtype=self.inputs["dtype"],
+                                   initializer=self.inputs["data_initializer"],
+                                   attach_grad=self.inputs["run_backward"])
+
+        self.block = nn.GlobalMaxPool1D(layout=self.inputs["layout"])
+        self.block.initialize(ctx=self.ctx)
+
+    def run_benchmark(self):
+        # Warm up, ignore execution time value
+        _, _ = block_forward_backward_and_time(block=self.block, runs=self.warmup, x=self.data)
+
+        # Run Benchmarks
+        exe_time, _ = block_forward_backward_and_time(block=self.block, runs=self.runs, x=self.data)
+
+        self.results["MX_Gluon_Imperative_GlobalMaxPool1D_Forward_Backward_Time"] = exe_time / self.runs
+
+
+class GlobalMaxPool2D(MXNetOperatorBenchmarkBase):
+    """Helps to benchmark Gluon GlobalMaxPool1D Block.
+
+    By default, benchmarks both forward and backward pass on the GlobalMaxPool1D block with layout (N, C, H, W)
+    on input of shape (32, 3, 256, 256). By default run on 'float32' precision.
+
+    """
+
+    def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
+        # Set the default Inputs
+        if inputs is None:
+            inputs = {"data": (32, 3, 256, 256),
+                      "data_initializer": nd.normal,
+                      "layout": "NCHW",
+                      "run_backward": True,
+                      "dtype": "float32"}
+
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+
+        self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
+                                   dtype=self.inputs["dtype"],
+                                   initializer=self.inputs["data_initializer"],
+                                   attach_grad=self.inputs["run_backward"])
+
+        self.block = nn.GlobalMaxPool2D(layout=self.inputs["layout"])
+        self.block.initialize(ctx=self.ctx)
+
+    def run_benchmark(self):
+        # Warm up, ignore execution time value
+        _, _ = block_forward_backward_and_time(block=self.block, runs=self.warmup, x=self.data)
+
+        # Run Benchmarks
+        exe_time, _ = block_forward_backward_and_time(block=self.block, runs=self.runs, x=self.data)
+
+        self.results["MX_Gluon_Imperative_GlobalMaxPool2D_Forward_Backward_Time"] = exe_time / self.runs
+
+
+class GlobalAvgPool1D(MXNetOperatorBenchmarkBase):
+    """Helps to benchmark Gluon GlobalAvgPool1D Block.
+
+    By default, benchmarks both forward and backward pass on the GlobalAvgPool1D block with layout (N, C, W)
+    on input of shape (32, 3, 256). By default run on 'float32' precision.
+
+    """
+
+    def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
+        # Set the default Inputs
+        if inputs is None:
+            inputs = {"data": (32, 3, 256),
+                      "data_initializer": nd.normal,
+                      "layout": "NCW",
+                      "run_backward": True,
+                      "dtype": "float32"}
+
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+
+        self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
+                                   dtype=self.inputs["dtype"],
+                                   initializer=self.inputs["data_initializer"],
+                                   attach_grad=self.inputs["run_backward"])
+
+        self.block = nn.GlobalAvgPool1D(layout=self.inputs["layout"])
+        self.block.initialize(ctx=self.ctx)
+
+    def run_benchmark(self):
+        # Warm up, ignore execution time value
+        _, _ = block_forward_backward_and_time(block=self.block, runs=self.warmup, x=self.data)
+
+        # Run Benchmarks
+        exe_time, _ = block_forward_backward_and_time(block=self.block, runs=self.runs, x=self.data)
+
+        self.results["MX_Gluon_Imperative_GlobalAvgPool1D_Forward_Backward_Time"] = exe_time / self.runs
+
+
+class GlobalAvgPool2D(MXNetOperatorBenchmarkBase):
+    """Helps to benchmark Gluon GlobalAvgPool2D Block.
+
+    By default, benchmarks both forward and backward pass on the GlobalAvgPool2D block with layout (N, C, H, W)
+    on input of shape (32, 3, 256, 256). By default run on 'float32' precision.
+
+    """
+
+    def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
+        # Set the default Inputs
+        if inputs is None:
+            inputs = {"data": (32, 3, 256, 256),
+                      "data_initializer": nd.normal,
+                      "layout": "NCHW",
+                      "run_backward": True,
+                      "dtype": "float32"}
+
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+
+        self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
+                                   dtype=self.inputs["dtype"],
+                                   initializer=self.inputs["data_initializer"],
+                                   attach_grad=self.inputs["run_backward"])
+
+        self.block = nn.GlobalAvgPool2D(layout=self.inputs["layout"])
+        self.block.initialize(ctx=self.ctx)
+
+    def run_benchmark(self):
+        # Warm up, ignore execution time value
+        _, _ = block_forward_backward_and_time(block=self.block, runs=self.warmup, x=self.data)
+
+        # Run Benchmarks
+        exe_time, _ = block_forward_backward_and_time(block=self.block, runs=self.runs, x=self.data)
+
+        self.results["MX_Gluon_Imperative_GlobalAvgPool2D_Forward_Backward_Time"] = exe_time / self.runs
+
+
 # Utilities
 def run_all_gluon_nn_pooling_operations_benchmarks():
     """Helper to run all Gluon Pooling Layer benchmarks. Just runs the benchmarks with default input values.
@@ -221,5 +369,18 @@ def run_all_gluon_nn_pooling_operations_benchmarks():
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
 
+    benchmark_ref = GlobalMaxPool1D()
+    benchmark_ref.run_benchmark()
+    benchmark_ref.print_benchmark_results()
 
-run_all_gluon_nn_pooling_operations_benchmarks()
+    benchmark_ref = GlobalMaxPool2D()
+    benchmark_ref.run_benchmark()
+    benchmark_ref.print_benchmark_results()
+
+    benchmark_ref = GlobalAvgPool1D()
+    benchmark_ref.run_benchmark()
+    benchmark_ref.print_benchmark_results()
+
+    benchmark_ref = GlobalAvgPool2D()
+    benchmark_ref.run_benchmark()
+    benchmark_ref.print_benchmark_results()

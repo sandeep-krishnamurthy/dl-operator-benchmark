@@ -8,6 +8,7 @@ from mxnet_benchmarks.nn_operations.activation_operations import run_all_gluon_n
 from mxnet_benchmarks.nn_operations.loss_operations import run_all_gluon_nn_loss_operations_benchmarks
 from mxnet_benchmarks.nn_operations.normalization_operations import run_all_gluon_normalization_operations_benchmarks
 from mxnet_benchmarks.nn_operations.convolution_operations import run_all_gluon_nn_convolution_operations_benchmarks
+from mxnet_benchmarks.nn_operations.pooling_operations import run_all_gluon_nn_pooling_operations_benchmarks
 
 """Driver program to kick off benchmark tasks.
 
@@ -47,3 +48,6 @@ run_all_gluon_normalization_operations_benchmarks()
 
 # Run all Gluon Convolution Layers operations benchmarks with default input values
 run_all_gluon_nn_convolution_operations_benchmarks()
+
+# Run all Gluon Pooling Layers operations benchmarks with default input values
+run_all_gluon_nn_pooling_operations_benchmarks()

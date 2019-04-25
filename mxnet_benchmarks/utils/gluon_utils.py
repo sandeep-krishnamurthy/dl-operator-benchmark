@@ -17,7 +17,6 @@ def block_forward_backward_and_time(*args, block, runs, **kwargs):
     :param kwargs: Key value arguments for the block being executed.
     :return: Tuple of (Total execution time in seconds, any results from block execution)
     """
-
     for _ in range(runs):
         with mx.autograd.record():
             res = block.forward(*args, **kwargs)

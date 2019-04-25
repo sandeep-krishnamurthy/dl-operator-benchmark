@@ -10,7 +10,7 @@ from mxnet_benchmarks.utils.gluon_utils import block_forward_backward_and_time
 1. Dense
 2. Lambda
 3. Flatten
-4. Embedding
+4. Embedding (TODO: skm@ - Find real world use case)
 
 TODO:
 1. Logging - Info, Error and Debug
@@ -171,6 +171,3 @@ def run_all_gluon_nn_basic_operations_benchmarks():
     benchmark_ref = Lambda()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
-
-
-run_all_gluon_nn_basic_operations_benchmarks()

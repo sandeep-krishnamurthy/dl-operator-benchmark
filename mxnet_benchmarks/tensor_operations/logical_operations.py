@@ -1,6 +1,7 @@
 import mxnet as mx
 from mxnet import nd
 
+from utils.common_utils import get_class_members_in_module
 from mxnet_benchmarks.MXNetOperatorBenchmark import MXNetOperatorBenchmarkBase
 from mxnet_benchmarks.utils.ndarray_utils import get_mx_ndarray, nd_forward_backward_and_time
 
@@ -170,28 +171,19 @@ def run_all_logical_comparison_operations_benchmarks():
     """Helper to run all Logical Comparison operator benchmarks. Just runs the benchmarks with default input values.
     This just a utility to run benchmarks with all default input values.
 
-    TODO: Capture results in a clean dictionary rather than printing everything to console.
+
+    :return: list[dict], list of dictionary of benchmark results. Each item in the list is a dictionary of benchmark
+                         results per operator.
+
     """
     logical_operations_results = []
 
-    benchmark_ref = LogicalAnd()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    logical_operations_results.append(benchmark_ref.get_benchmark_results())
+    members = get_class_members_in_module(__name__)
 
-    benchmark_ref = LogicalOr()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    logical_operations_results.append(benchmark_ref.get_benchmark_results())
-
-    benchmark_ref = LogicalXor()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    logical_operations_results.append(benchmark_ref.get_benchmark_results())
-
-    benchmark_ref = LogicalNot()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    logical_operations_results.append(benchmark_ref.get_benchmark_results())
+    for _, cls in members:
+        benchmark_ref = cls()
+        benchmark_ref.run_benchmark()
+        benchmark_ref.print_benchmark_results()
+        logical_operations_results.append(benchmark_ref.get_benchmark_results())
 
     return logical_operations_results

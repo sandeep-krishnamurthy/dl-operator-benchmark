@@ -2,6 +2,7 @@ import mxnet as mx
 import mxnet.ndarray as nd
 from mxnet.gluon import rnn
 
+from utils.common_utils import get_class_members_in_module
 from mxnet_benchmarks.MXNetOperatorBenchmark import MXNetOperatorBenchmarkBase
 from mxnet_benchmarks.utils.ndarray_utils import get_mx_ndarray
 from mxnet_benchmarks.utils.gluon_utils import block_forward_backward_and_time
@@ -175,23 +176,18 @@ def run_all_gluon_recurrent_operations_benchmarks():
     """Helper to run all Gluon Recurrent Layers benchmarks. Just runs the benchmarks with default input values.
     This just a utility to run benchmarks with all default input values.
 
-    TODO: Capture results in a clean dictionary rather than printing everything to console.
+    :return: list[dict], list of dictionary of benchmark results. Each item in the list is a dictionary of benchmark
+                         results per operator.
+
     """
     recurrent_operations_results = []
 
-    benchmark_ref = RNN()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    recurrent_operations_results.append(benchmark_ref.get_benchmark_results())
+    members = get_class_members_in_module(__name__)
 
-    benchmark_ref = LSTM()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    recurrent_operations_results.append(benchmark_ref.get_benchmark_results())
-
-    benchmark_ref = GRU()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    recurrent_operations_results.append(benchmark_ref.get_benchmark_results())
+    for _, cls in members:
+        benchmark_ref = cls()
+        benchmark_ref.run_benchmark()
+        benchmark_ref.print_benchmark_results()
+        recurrent_operations_results.append(benchmark_ref.get_benchmark_results())
 
     return recurrent_operations_results

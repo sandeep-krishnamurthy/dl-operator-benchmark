@@ -1,6 +1,7 @@
 import mxnet as mx
 import mxnet.ndarray as nd
 
+from utils.common_utils import get_class_members_in_module
 from mxnet_benchmarks.MXNetOperatorBenchmark import MXNetOperatorBenchmarkBase
 from mxnet_benchmarks.utils.ndarray_utils import get_mx_ndarray, nd_forward_backward_and_time
 
@@ -253,38 +254,19 @@ def run_all_comparison_operations_benchmarks():
     """Helper to run all Comparison operator benchmarks. Just runs the benchmarks with default input values.
     This just a utility to run benchmarks with all default input values.
 
-    TODO: Capture results in a clean dictionary rather than printing everything to console.
+
+    :return: list[dict], list of dictionary of benchmark results. Each item in the list is a dictionary of benchmark
+                         results per operator.
+
     """
     comparison_operations_results = []
 
-    benchmark_ref = Lesser()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    comparison_operations_results.append(benchmark_ref.get_benchmark_results())
+    members = get_class_members_in_module(__name__)
 
-    benchmark_ref = LesserEqual()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    comparison_operations_results.append(benchmark_ref.get_benchmark_results())
-
-    benchmark_ref = Greater()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    comparison_operations_results.append(benchmark_ref.get_benchmark_results())
-
-    benchmark_ref = GreaterEqual()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    comparison_operations_results.append(benchmark_ref.get_benchmark_results())
-
-    benchmark_ref = Equal()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    comparison_operations_results.append(benchmark_ref.get_benchmark_results())
-
-    benchmark_ref = NotEqual()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    comparison_operations_results.append(benchmark_ref.get_benchmark_results())
+    for _, cls in members:
+        benchmark_ref = cls()
+        benchmark_ref.run_benchmark()
+        benchmark_ref.print_benchmark_results()
+        comparison_operations_results.append(benchmark_ref.get_benchmark_results())
 
     return comparison_operations_results

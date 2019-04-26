@@ -1,6 +1,7 @@
 import mxnet as mx
 import mxnet.ndarray as nd
 
+from utils.common_utils import get_class_members_in_module
 from mxnet_benchmarks.MXNetOperatorBenchmark import MXNetOperatorBenchmarkBase
 from mxnet_benchmarks.utils.ndarray_utils import nd_forward_and_time, get_mx_ndarray
 
@@ -220,38 +221,19 @@ def run_all_tensor_creation_operations_benchmarks():
     """Helper to run Exponential and Log operator benchmarks. Just runs the benchmarks with default input values.
     This just a utility to run benchmarks with all default input values.
 
-    TODO: Capture results in a clean dictionary rather than printing everything to console.
+
+    :return: list[dict], list of dictionary of benchmark results. Each item in the list is a dictionary of benchmark
+                         results per operator.
+
     """
     creation_operations_results = []
 
-    benchmark_ref = Zeros()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    creation_operations_results.append(benchmark_ref.get_benchmark_results())
+    members = get_class_members_in_module(__name__)
 
-    benchmark_ref = Ones()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    creation_operations_results.append(benchmark_ref.get_benchmark_results())
-
-    benchmark_ref = ZerosLike()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    creation_operations_results.append(benchmark_ref.get_benchmark_results())
-
-    benchmark_ref = OnesLike()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    creation_operations_results.append(benchmark_ref.get_benchmark_results())
-
-    benchmark_ref = Full()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    creation_operations_results.append(benchmark_ref.get_benchmark_results())
-
-    benchmark_ref = Arange()
-    benchmark_ref.run_benchmark()
-    benchmark_ref.print_benchmark_results()
-    creation_operations_results.append(benchmark_ref.get_benchmark_results())
+    for _, cls in members:
+        benchmark_ref = cls()
+        benchmark_ref.run_benchmark()
+        benchmark_ref.print_benchmark_results()
+        creation_operations_results.append(benchmark_ref.get_benchmark_results())
 
     return creation_operations_results

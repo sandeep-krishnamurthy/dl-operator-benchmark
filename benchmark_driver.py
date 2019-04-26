@@ -4,6 +4,8 @@ from mxnet_benchmarks.tensor_operations.comparison_operations import run_all_com
 from mxnet_benchmarks.tensor_operations.logical_operations import run_all_logical_comparison_operations_benchmarks
 from mxnet_benchmarks.tensor_operations.exp_and_log_operations import run_all_exponential_and_log_operations_benchmarks
 from mxnet_benchmarks.tensor_operations.gemm_operations import run_all_gemm_operations_benchmarks
+from mxnet_benchmarks.tensor_operations.sorting_searching_operations import \
+    run_all_sort_and_search_operations_benchmarks
 
 from mxnet_benchmarks.nn_operations.basic_operations import run_all_gluon_nn_basic_operations_benchmarks
 from mxnet_benchmarks.nn_operations.activation_operations import run_all_gluon_nn_activation_operations_benchmarks
@@ -42,6 +44,9 @@ run_all_exponential_and_log_operations_benchmarks()
 
 # Run all GEMM operations benchmarks with default input values
 run_all_gemm_operations_benchmarks()
+
+# Run all sorting and searching operations benchmarks with default input values
+run_all_sort_and_search_operations_benchmarks()
 
 #       MXNET GLUON NN LAYERS BENCHMARKS        #
 

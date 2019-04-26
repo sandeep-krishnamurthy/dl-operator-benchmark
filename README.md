@@ -48,11 +48,11 @@ python dl-operator-benchmark/benchmark_driver.py
 
 ### Run benchmarks for all the operators in a specific category
 
-For example, you want to run benchmarks for all `Arithmetic Operators`, you just run the following python script.
+For example, you want to run benchmarks for all `NDArray Arithmetic Operators`, you just run the following python script.
 
 ```python
 #! /usr/bin/python
-from mxnet_benchmarks.tensor_operations.arithmetic_operations import run_all_arithmetic_operations_benchmarks
+from mxnet_benchmarks.nd import run_all_arithmetic_operations_benchmarks
 
 # Run all Arithmetic operations benchmarks with default input values
 run_all_arithmetic_operations_benchmarks()
@@ -78,11 +78,13 @@ MX_Inplace_Modulo_Forward_Time - 0.018180 seconds
 
 ### Run benchmarks for specific operator
 
-For example, you want to run benchmarks for `Addition` operator, you just run the following python script.
+For example, you want to run benchmarks for `nd.add` operator in MXNet, you just run the following python script.
+
+**CASE 1** Default Inputs
 
 ```python
 #! /usr/bin/python
-from mxnet_benchmarks.tensor_operations.arithmetic_operations import Add
+from mxnet_benchmarks.nd import Add
 
 # Run all Arithmetic operations benchmarks with default input values
 add_benchmark = Add()
@@ -95,4 +97,40 @@ Output for the above benchmark run, on a CPU machine, would look something like 
 
 ```
 MX_Add_Forward_Backward_Time - 0.015201 seconds
+```
+
+**CASE 2** Custom Inputs
+
+In this case, let us assume, you want to run benchmarks on a `float64` tensor instead of a default `float32`.
+
+```python
+#! /usr/bin/python
+from mxnet_benchmarks.nd import Add
+
+# Run all Arithmetic operations benchmarks with default input values
+add_benchmark = Add(inputs={"dtype": "float64"})
+add_benchmark.run_benchmark()
+add_benchmark.print_benchmark_results()
+
+```
+
+Output for the above benchmark run, on a CPU machine, would look something like below:
+
+```
+MX_Add_Forward_Backward_Time - 0.025405 seconds
+```
+
+NOTE: You can print the input parameters used for a benchmark as shown below.
+
+```python
+from mxnet_benchmarks.nd import Add
+
+# Run all Arithmetic operations benchmarks with default input values
+add_benchmark = Add(inputs={"dtype": "float64"})
+print(add_benchmark.inputs)
+```
+
+Output:
+```
+{'lhs': (1024, 1024), 'rhs': (1024, 1024), 'initializer': <function normal at 0x117b607b8>, 'run_backward': True, 'dtype': 'float64'}
 ```

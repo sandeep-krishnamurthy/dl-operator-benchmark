@@ -47,10 +47,20 @@ git clone https://github.com/sandeep-krishnamurthy/dl-operator-benchmark
 
 ### Run benchmarks for all the operators
 
-```
-python dl-operator-benchmark/benchmark_driver.py
+Below command runs all the MXNet operators (NDArray and Gluon) benchmarks with default inputs and saves the final result as JSON in the provided file.
 
 ```
+python dl-operator-benchmark/run_all_mxnet_operator_benchmarks.py --output-format json --output-file mxnet_operator_benchmark_results.json
+
+```
+
+**Other Options:**
+
+1. **output-format** : `json` or `md` for markdown file output or `csv`.
+
+2. **ctx** : By default, `cpu` on CPU machine, `gpu(0)` on GPU machine. You can override and set the global context for all operator benchmarks. Example: `--ctx gpu(2)`.
+
+3. **dtype** : By default, `float32`. You can override and set the global dtype for all operator benchmarks. Example: `--dtype float64`.
 
 ### Run benchmarks for all the operators in a specific category
 
@@ -143,7 +153,8 @@ Output:
 
 ## Future Development
 
-1. Currently around 134 MXNet operators (out of around 250) are supported for benchmarks. Help add more operators support.
+1. Logging
+2. Currently around 134 MXNet operators (out of around 250) are supported for benchmarks. Help add more operators support.
 2. Add support for Memory profiling and benchmarking.
 3. Support more complex operator structure for benchmarking. Example: Fused operator - Conv + BatchNorm, Conv + Relu etc.
 4. Integration with MXNet profiler to get more fine grained profiling results such as eliminate Python layer overhead, pure forward only timing, backward only timing.

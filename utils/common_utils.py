@@ -1,3 +1,6 @@
+import inspect
+import sys
+
 from collections import ChainMap
 
 
@@ -37,3 +40,16 @@ def merge_map_list(map_list):
 
     """
     return dict(ChainMap(*map_list))
+
+
+def get_class_members_in_module(module_name):
+    """Get list of class members in the given module. It returns only instantiable module names i.e.,
+    non-abstract class names.
+
+    :param module_name: Name of the module from where to list all the class member names.
+    :return: tuple, (class_name, class_object)
+    """
+    members = inspect.getmembers(sys.modules[module_name],
+                                 lambda member: inspect.isclass(member) and member.__module__ == module_name
+                                                and not inspect.isabstract(member))
+    return members

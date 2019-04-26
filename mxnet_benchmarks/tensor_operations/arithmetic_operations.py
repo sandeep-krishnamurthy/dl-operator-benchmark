@@ -473,50 +473,66 @@ def run_all_arithmetic_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    arithmetic_operations_results = []
+
     benchmark_ref = Add()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    arithmetic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Multiply()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    arithmetic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Subtract()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    arithmetic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Divide()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    arithmetic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Modulo()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    arithmetic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Power()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    arithmetic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Negative()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    arithmetic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = IAdd()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    arithmetic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = ISub()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    arithmetic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = IMul()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    arithmetic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = IDiv()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    arithmetic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = IMod()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    arithmetic_operations_results.append(benchmark_ref.get_benchmark_results())
+
+    return arithmetic_operations_results

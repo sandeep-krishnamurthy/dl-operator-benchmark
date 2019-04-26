@@ -226,18 +226,26 @@ def run_all_gluon_nn_loss_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    nn_loss_operations_results = []
+
     benchmark_ref = L1Loss()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    nn_loss_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = L2Loss()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    nn_loss_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = SigmoidBinaryCrossEntropyLoss()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    nn_loss_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = SoftmaxCrossEntropyLoss()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    nn_loss_operations_results.append(benchmark_ref.get_benchmark_results())
+
+    return nn_loss_operations_results

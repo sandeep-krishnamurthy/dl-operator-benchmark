@@ -246,19 +246,26 @@ def run_all_gluon_nn_convolution_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    nn_convolution_operations_results = []
 
     benchmark_ref = Conv2D()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    nn_convolution_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Conv1D()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    nn_convolution_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Conv1DTranspose()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    nn_convolution_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Conv2DTranspose()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    nn_convolution_operations_results.append(benchmark_ref.get_benchmark_results())
+
+    return  nn_convolution_operations_results

@@ -160,14 +160,21 @@ def run_all_gluon_nn_basic_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    nn_basic_operations_results = []
+
     benchmark_ref = Dense()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    nn_basic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Flatten()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    nn_basic_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Lambda()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    nn_basic_operations_results.append(benchmark_ref.get_benchmark_results())
+
+    return nn_basic_operations_results

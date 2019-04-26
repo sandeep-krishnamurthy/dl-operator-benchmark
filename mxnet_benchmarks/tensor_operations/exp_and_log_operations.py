@@ -87,10 +87,16 @@ def run_all_exponential_and_log_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    exp_log_operation_results = []
+
     benchmark_ref = Log()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    exp_log_operation_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Exp()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    exp_log_operation_results.append(benchmark_ref.get_benchmark_results())
+
+    return exp_log_operation_results

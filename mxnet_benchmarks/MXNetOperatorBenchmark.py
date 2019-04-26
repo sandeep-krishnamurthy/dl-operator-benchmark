@@ -29,3 +29,6 @@ class MXNetOperatorBenchmarkBase(ABC):
 
         for key, val in self.results.items():
             print("{} - {:.6f} seconds".format(key, val))
+
+    def get_benchmark_results(self):
+        return self.results

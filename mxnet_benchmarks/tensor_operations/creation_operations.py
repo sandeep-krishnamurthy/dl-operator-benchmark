@@ -222,26 +222,36 @@ def run_all_tensor_creation_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    creation_operations_results = []
+
     benchmark_ref = Zeros()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    creation_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Ones()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    creation_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = ZerosLike()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    creation_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = OnesLike()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    creation_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Full()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    creation_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Arange()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    creation_operations_results.append(benchmark_ref.get_benchmark_results())
+
+    return creation_operations_results

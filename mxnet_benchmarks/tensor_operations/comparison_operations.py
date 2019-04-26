@@ -255,26 +255,36 @@ def run_all_comparison_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    comparison_operations_results = []
+
     benchmark_ref = Lesser()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    comparison_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = LesserEqual()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    comparison_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Greater()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    comparison_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = GreaterEqual()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    comparison_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = Equal()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    comparison_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = NotEqual()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    comparison_operations_results.append(benchmark_ref.get_benchmark_results())
+
+    return comparison_operations_results

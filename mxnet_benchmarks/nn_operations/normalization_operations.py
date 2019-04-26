@@ -99,10 +99,16 @@ def run_all_gluon_normalization_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    normalization_operation_results = []
+
     benchmark_ref = Dropout()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    normalization_operation_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = BatchNorm()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    normalization_operation_results.append(benchmark_ref.get_benchmark_results())
+
+    return normalization_operation_results

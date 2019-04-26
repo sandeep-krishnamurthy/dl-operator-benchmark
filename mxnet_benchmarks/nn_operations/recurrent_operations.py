@@ -177,14 +177,21 @@ def run_all_gluon_recurrent_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    recurrent_operations_results = []
+
     benchmark_ref = RNN()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    recurrent_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = LSTM()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    recurrent_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = GRU()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    recurrent_operations_results.append(benchmark_ref.get_benchmark_results())
+
+    return recurrent_operations_results

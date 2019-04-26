@@ -123,10 +123,16 @@ def run_all_gemm_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    gemm_operation_results = []
+
     benchmark_ref = Dot()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    gemm_operation_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = BatchDot()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    gemm_operation_results.append(benchmark_ref.get_benchmark_results())
+
+    return gemm_operation_results

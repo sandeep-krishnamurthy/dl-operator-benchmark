@@ -225,22 +225,31 @@ def run_all_sort_and_search_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    sort_search_operations_results = []
+
     benchmark_ref = Sort()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    sort_search_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = ArgSort()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    sort_search_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = TopK()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    sort_search_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = ArgMax()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    sort_search_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = ArgMin()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    sort_search_operations_results.append(benchmark_ref.get_benchmark_results())
+
+    return sort_search_operations_results

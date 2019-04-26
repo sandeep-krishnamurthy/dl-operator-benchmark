@@ -172,18 +172,26 @@ def run_all_logical_comparison_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    logical_operations_results = []
+
     benchmark_ref = LogicalAnd()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    logical_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = LogicalOr()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    logical_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = LogicalXor()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    logical_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = LogicalNot()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    logical_operations_results.append(benchmark_ref.get_benchmark_results())
+
+    return logical_operations_results

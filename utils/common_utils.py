@@ -1,3 +1,6 @@
+from collections import ChainMap
+
+
 def prepare_input_parameters(caller, default_parameters, custom_parameters=None):
     """Prepares an input parameter dictionary for operator benchmarks. Performs the union of default_parameters and
     custom_parameters i.e., takes the parameters provided, if any, in custom_parameters and replaces them in the
@@ -22,3 +25,15 @@ def prepare_input_parameters(caller, default_parameters, custom_parameters=None)
         default_parameters[key] = value
 
     return default_parameters
+
+
+def merge_map_list(map_list):
+    """Merge all the Map in map_list into one final Map.
+
+    Useful when you have a list of benchmark result maps and you want to prepare one final map combining all results.
+
+    :param map_list: List of maps to be merged.
+    :return: map where all individual maps in the into map_list are merged
+
+    """
+    return dict(ChainMap(*map_list))

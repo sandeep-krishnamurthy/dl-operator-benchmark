@@ -353,34 +353,46 @@ def run_all_gluon_nn_pooling_operations_benchmarks():
 
     TODO: Capture results in a clean dictionary rather than printing everything to console.
     """
+    pooling_operations_results = []
+
     benchmark_ref = MaxPool1D()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    pooling_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = MaxPool2D()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    pooling_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = AvgPool1D()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    pooling_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = AvgPool2D()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    pooling_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = GlobalMaxPool1D()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    pooling_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = GlobalMaxPool2D()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    pooling_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = GlobalAvgPool1D()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    pooling_operations_results.append(benchmark_ref.get_benchmark_results())
 
     benchmark_ref = GlobalAvgPool2D()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
+    pooling_operations_results.append(benchmark_ref.get_benchmark_results())
+
+    return pooling_operations_results

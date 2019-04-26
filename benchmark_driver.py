@@ -80,11 +80,10 @@ mxnet_operator_benchmark_results.extend(run_all_gluon_recurrent_operations_bench
 # Run MXNet Custom Op Benchmarks with default input values
 mxnet_operator_benchmark_results.extend(run_customop_operations_benchmarks())
 
-
 # ****************************** PREPARE FINAL RESULTS ********************************
 final_benchmark_result_map = merge_map_list(mxnet_operator_benchmark_results)
 
 # TODO: Get the result file and format as input. Ex: result can be markdown or json string rather file etc.
 # Save as JSON
-with open("mxnet_operator_benchmarks.json", "wb") as result_file:
-    json.dump(final_benchmark_result_map, result_file)
+with open("mxnet_operator_benchmarks.json", "w") as result_file:
+    json.dump(final_benchmark_result_map, result_file, indent=4)

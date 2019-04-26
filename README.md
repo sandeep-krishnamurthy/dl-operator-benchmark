@@ -80,7 +80,7 @@ MX_Inplace_Modulo_Forward_Time - 0.018180 seconds
 
 For example, you want to run benchmarks for `nd.add` operator in MXNet, you just run the following python script.
 
-**CASE 1** Default Inputs
+#### CASE 1 - Default Inputs for Operators
 
 ```python
 #! /usr/bin/python
@@ -99,7 +99,7 @@ Output for the above benchmark run, on a CPU machine, would look something like 
 MX_Add_Forward_Backward_Time - 0.015201 seconds
 ```
 
-**CASE 2** Custom Inputs
+#### CASE 2 - Customize Inputs for Operators
 
 In this case, let us assume, you want to run benchmarks on a `float64` tensor instead of a default `float32`.
 
@@ -120,7 +120,7 @@ Output for the above benchmark run, on a CPU machine, would look something like 
 MX_Add_Forward_Backward_Time - 0.025405 seconds
 ```
 
-NOTE: You can print the input parameters used for a benchmark as shown below.
+**NOTE:** You can print the input parameters used for a benchmark as shown below.
 
 ```python
 from mxnet_benchmarks.nd import Add

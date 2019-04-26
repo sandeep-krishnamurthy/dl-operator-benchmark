@@ -1,6 +1,7 @@
 import mxnet as mx
 import mxnet.ndarray as nd
 
+
 """ Performance benchmark tests for MXNet NDArray Random Sampling Operations
 1. normal
 2. poisson

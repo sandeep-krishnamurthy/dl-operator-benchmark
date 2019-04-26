@@ -27,12 +27,12 @@ class Zeros(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default inputs
-        if inputs is None:
-            inputs = {"shape": (1024, 1024),
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"shape": (1024, 1024),
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
     def run_benchmark(self):
         # Warm up, ignore execution time value
@@ -55,12 +55,12 @@ class Ones(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default inputs
-        if inputs is None:
-            inputs = {"shape": (1024, 1024),
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"shape": (1024, 1024),
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
     def run_benchmark(self):
         # Warm up, ignore execution time value
@@ -83,13 +83,13 @@ class ZerosLike(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default inputs
-        if inputs is None:
-            inputs = {"data": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"data": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -115,13 +115,13 @@ class OnesLike(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default inputs
-        if inputs is None:
-            inputs = {"data": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"data": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -147,13 +147,13 @@ class Full(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default inputs
-        if inputs is None:
-            inputs = {"shape": (1024, 1024),
-                      "val": 1.0,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"shape": (1024, 1024),
+                              "val": 1.0,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
     def run_benchmark(self):
         # Warm up, ignore execution time value
@@ -183,15 +183,15 @@ class Arange(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default inputs
-        if inputs is None:
-            inputs = {"start": 1,
-                      "stop": 100,
-                      "step": 1.0,
-                      "repeat": 10,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"start": 1,
+                              "stop": 100,
+                              "step": 1.0,
+                              "repeat": 10,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
     def run_benchmark(self):
         # Warm up, ignore execution time value

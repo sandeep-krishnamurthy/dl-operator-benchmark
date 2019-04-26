@@ -10,7 +10,6 @@ from mxnet_benchmarks.utils.ndarray_utils import get_mx_ndarray, nd_forward_and_
 3. topk
 4. argmax
 5. argmin
-6. argmax_channel
 
 TODO:
 1. Sort and Argsort
@@ -18,6 +17,7 @@ TODO:
     1.2 Flatten and sort
 2. TopK
     1.1 K being a very small number (ex: 1) on a axis with 1000 values.
+3. argmax_channel (This is same as argmax with axis=-1
 """
 
 
@@ -32,15 +32,15 @@ class Sort(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (1024, 1000),
-                      "initializer": nd.normal,
-                      "axis": -1,
-                      "is_ascend": True,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"data": (1024, 1000),
+                              "initializer": nd.normal,
+                              "axis": -1,
+                              "is_ascend": True,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -70,15 +70,15 @@ class ArgSort(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (1024, 1000),
-                      "initializer": nd.normal,
-                      "axis": -1,
-                      "is_ascend": True,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"data": (1024, 1000),
+                              "initializer": nd.normal,
+                              "axis": -1,
+                              "is_ascend": True,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -109,17 +109,17 @@ class TopK(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (1024, 1000),
-                      "initializer": nd.normal,
-                      "axis": -1,
-                      "k": 10,
-                      "ret_typ": "indices",
-                      "is_ascend": True,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"data": (1024, 1000),
+                              "initializer": nd.normal,
+                              "axis": -1,
+                              "k": 10,
+                              "ret_typ": "indices",
+                              "is_ascend": True,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -152,15 +152,15 @@ class ArgMax(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (1024, 1000),
-                      "initializer": nd.normal,
-                      "axis": -1,
-                      "keepdims": False,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"data": (1024, 1000),
+                              "initializer": nd.normal,
+                              "axis": -1,
+                              "keepdims": False,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -191,15 +191,15 @@ class ArgMin(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (1024, 1000),
-                      "initializer": nd.normal,
-                      "axis": -1,
-                      "keepdims": False,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"data": (1024, 1000),
+                              "initializer": nd.normal,
+                              "axis": -1,
+                              "keepdims": False,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -244,6 +244,3 @@ def run_all_sort_and_search_operations_benchmarks():
     benchmark_ref = ArgMin()
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
-
-
-run_all_sort_and_search_operations_benchmarks()

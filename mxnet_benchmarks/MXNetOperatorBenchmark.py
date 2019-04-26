@@ -1,18 +1,22 @@
 import mxnet as mx
-import mxnet.ndarray as nd
 
 from abc import ABC, abstractmethod
+
+from utils.common_utils import prepare_input_parameters
 
 
 class MXNetOperatorBenchmarkBase(ABC):
     """Abstract Base class for all MXNet operator benchmarks.
     """
-    def __init__(self, ctx=mx.cpu(), warmup=10, runs=10, inputs={}):
+
+    def __init__(self, ctx=mx.cpu(), warmup=10, runs=10, default_parameters={}, custom_parameters=None):
         self.ctx = ctx
         self.runs = runs
         self.warmup = warmup
         self.results = {}
-        self.inputs = inputs
+        self.inputs = prepare_input_parameters(caller=self.__class__.__name__,
+                                               default_parameters=default_parameters,
+                                               custom_parameters=custom_parameters)
 
     @abstractmethod
     def run_benchmark(self):

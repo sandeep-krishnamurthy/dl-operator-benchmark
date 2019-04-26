@@ -34,14 +34,14 @@ class Add(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"lhs": (1024, 1024),
-                      "rhs": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"lhs": (1024, 1024),
+                              "rhs": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.lhs = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["lhs"],
                                   dtype=self.inputs["dtype"],
@@ -71,14 +71,14 @@ class Subtract(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"lhs": (1024, 1024),
-                      "rhs": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"lhs": (1024, 1024),
+                              "rhs": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.lhs = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["lhs"],
                                   dtype=self.inputs["dtype"],
@@ -108,14 +108,14 @@ class Multiply(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"lhs": (1024, 1024),
-                      "rhs": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"lhs": (1024, 1024),
+                              "rhs": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.lhs = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["lhs"],
                                   dtype=self.inputs["dtype"],
@@ -145,14 +145,14 @@ class Divide(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"lhs": (1024, 1024),
-                      "rhs": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"lhs": (1024, 1024),
+                              "rhs": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.lhs = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["lhs"],
                                   dtype=self.inputs["dtype"],
@@ -182,14 +182,14 @@ class Modulo(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"lhs": (1024, 1024),
-                      "rhs": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"lhs": (1024, 1024),
+                              "rhs": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.lhs = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["lhs"],
                                   dtype=self.inputs["dtype"],
@@ -218,14 +218,14 @@ class Power(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"base": (1024, 1024),
-                      "exp": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"base": (1024, 1024),
+                              "exp": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.base = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["base"],
                                    dtype=self.inputs["dtype"],
@@ -254,13 +254,13 @@ class Negative(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -287,14 +287,14 @@ class IAdd(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"this": (1024, 1024),
-                      "other": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"this": (1024, 1024),
+                              "other": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.this = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["this"],
                                    dtype=self.inputs["dtype"],
@@ -325,15 +325,14 @@ class ISub(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"this": (1024, 1024),
-                      "other": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"this": (1024, 1024),
+                              "other": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
-
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
         self.this = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["this"],
                                    dtype=self.inputs["dtype"],
                                    initializer=self.inputs["initializer"],
@@ -363,14 +362,14 @@ class IMul(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"this": (1024, 1024),
-                      "other": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"this": (1024, 1024),
+                              "other": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.this = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["this"],
                                    dtype=self.inputs["dtype"],
@@ -401,14 +400,14 @@ class IDiv(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"this": (1024, 1024),
-                      "other": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"this": (1024, 1024),
+                              "other": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.this = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["this"],
                                    dtype=self.inputs["dtype"],
@@ -439,14 +438,14 @@ class IMod(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"this": (1024, 1024),
-                      "other": (1024, 1024),
-                      "initializer": nd.normal,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"this": (1024, 1024),
+                              "other": (1024, 1024),
+                              "initializer": nd.normal,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.this = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["this"],
                                    dtype=self.inputs["dtype"],

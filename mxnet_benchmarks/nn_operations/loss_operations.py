@@ -34,16 +34,16 @@ class L1Loss(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default prediction is (32, 1000, 1) to mimic a prediction of batch_size=32 and 1000 class classification.
-        if inputs is None:
-            inputs = {"pred": (32, 1000, 1),
-                      "pred_initializer": nd.normal,
-                      "label": (32, 1000, 1),
-                      "label_initializer": nd.normal,
-                      "weight": 1.0,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"pred": (32, 1000, 1),
+                              "pred_initializer": nd.normal,
+                              "label": (32, 1000, 1),
+                              "label_initializer": nd.normal,
+                              "weight": 1.0,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         # Create a random prediction and label tensor
         self.pred = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["pred"],
@@ -82,16 +82,16 @@ class L2Loss(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default prediction is (32, 1000, 1) to mimic a prediction of batch_size=32 and 1000 class classification.
-        if inputs is None:
-            inputs = {"pred": (32, 1000, 1),
-                      "pred_initializer": nd.normal,
-                      "label": (32, 1000, 1),
-                      "label_initializer": nd.normal,
-                      "weight": 1.0,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"pred": (32, 1000, 1),
+                              "pred_initializer": nd.normal,
+                              "label": (32, 1000, 1),
+                              "label_initializer": nd.normal,
+                              "weight": 1.0,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         # Create a random prediction and label tensor
         self.pred = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["pred"],
@@ -130,16 +130,16 @@ class SigmoidBinaryCrossEntropyLoss(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default prediction is (32, 1000, 1) to mimic a prediction of batch_size=32 and 1000 class classification.
-        if inputs is None:
-            inputs = {"pred": (32, 1000, 1),
-                      "pred_initializer": nd.ones,
-                      "label": (32, 1000, 1),
-                      "label_initializer": nd.zeros,
-                      "weight": 1.0,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"pred": (32, 1000, 1),
+                              "pred_initializer": nd.ones,
+                              "label": (32, 1000, 1),
+                              "label_initializer": nd.zeros,
+                              "weight": 1.0,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         # Create a random prediction and label tensor
         self.pred = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["pred"],
@@ -178,18 +178,18 @@ class SoftmaxCrossEntropyLoss(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default prediction is (32, 1000, 1) to mimic a prediction of batch_size=32 and 1000 class classification.
-        if inputs is None:
-            inputs = {"pred": (32, 1000, 1),
-                      "pred_initializer": nd.normal,
-                      "label": (32, 1000, 1),
-                      "label_initializer": nd.normal,
-                      "weight": 1.0,
-                      "axis": -1,
-                      "sparse_label": False,
-                      "run_backward": False,
-                      "dtype": "float32"}
+        default_parameters = {"pred": (32, 1000, 1),
+                              "pred_initializer": nd.normal,
+                              "label": (32, 1000, 1),
+                              "label_initializer": nd.normal,
+                              "weight": 1.0,
+                              "axis": -1,
+                              "sparse_label": False,
+                              "run_backward": False,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         # Create a random prediction and label tensor
         self.pred = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["pred"],

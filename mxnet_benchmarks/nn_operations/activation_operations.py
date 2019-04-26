@@ -30,14 +30,14 @@ class LeakyRelu(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (32, 3, 256, 256) to mimic an input of batch_size=128 and a sample image of size 3*256*256.
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "alpha": 0.01,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "alpha": 0.01,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -70,14 +70,14 @@ class PRelu(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (32, 3, 256, 256) to mimic an input of batch_size=128 and a sample image of size 3*256*256.
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "alpha_initializer": 'zeros',
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "alpha_initializer": 'zeros',
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -109,13 +109,13 @@ class Sigmoid(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (32, 3, 256, 256) to mimic an input of batch_size=128 and a sample image of size 3*256*256.
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -147,13 +147,13 @@ class Softmax(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (32, 3, 256, 256) to mimic an input of batch_size=128 and a sample image of size 3*256*256.
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -181,13 +181,13 @@ class LogSoftmax(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (32, 3, 256, 256) to mimic an input of batch_size=128 and a sample image of size 3*256*256.
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -215,13 +215,13 @@ class Tanh(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (32, 3, 256, 256) to mimic an input of batch_size=128 and a sample image of size 3*256*256.
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -253,13 +253,13 @@ class Elu(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (32, 3, 256, 256) to mimic an input of batch_size=128 and a sample image of size 3*256*256.
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -291,13 +291,13 @@ class Selu(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (32, 3, 256, 256) to mimic an input of batch_size=128 and a sample image of size 3*256*256.
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -329,13 +329,13 @@ class Swish(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (32, 3, 256, 256) to mimic an input of batch_size=128 and a sample image of size 3*256*256.
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],

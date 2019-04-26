@@ -23,14 +23,14 @@ class Dropout(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (32, 3, 256, 256) with rate=0.5
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "rate": 0.5,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "rate": 0.5,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         # Create a random prediction and label tensor
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
@@ -64,13 +64,13 @@ class BatchNorm(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (32, 3, 256, 256)
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         # Create a random prediction and label tensor
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],

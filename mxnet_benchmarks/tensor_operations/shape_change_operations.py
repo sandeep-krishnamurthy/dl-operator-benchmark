@@ -1,6 +1,7 @@
 import mxnet as mx
 import mxnet.ndarray as nd
 
+
 """ Performance benchmark tests for MXNet NDArray Shape change Operations
 1. Transpose
 2. shape_array

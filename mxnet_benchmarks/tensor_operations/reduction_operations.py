@@ -1,6 +1,7 @@
 import mxnet as mx
 import mxnet.ndarray as nd
 
+
 """ Performance benchmark tests for MXNet NDArray Reduction Operations
 1. sum
 2. nansum

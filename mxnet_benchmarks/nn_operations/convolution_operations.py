@@ -30,20 +30,20 @@ class Conv2D(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "channels": 64,
-                      "kernel_size": (3, 3),
-                      "strides": (1, 1),
-                      "padding": (0, 0),
-                      "dilation": (1, 1),
-                      "layout": "NCHW",
-                      "activation": None,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "channels": 64,
+                              "kernel_size": (3, 3),
+                              "strides": (1, 1),
+                              "padding": (0, 0),
+                              "dilation": (1, 1),
+                              "layout": "NCHW",
+                              "activation": None,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -83,21 +83,21 @@ class Conv2DTranspose(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "channels": 64,
-                      "kernel_size": (3, 3),
-                      "strides": (1, 1),
-                      "padding": (0, 0),
-                      "output_padding": (0, 0),
-                      "dilation": (1, 1),
-                      "layout": "NCHW",
-                      "activation": None,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "channels": 64,
+                              "kernel_size": (3, 3),
+                              "strides": (1, 1),
+                              "padding": (0, 0),
+                              "output_padding": (0, 0),
+                              "dilation": (1, 1),
+                              "layout": "NCHW",
+                              "activation": None,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -144,20 +144,20 @@ class Conv1D(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (32, 3, 256),
-                      "data_initializer": nd.normal,
-                      "channels": 64,
-                      "kernel_size": 3,
-                      "strides": 1,
-                      "padding": 1,
-                      "dilation": 1,
-                      "layout": "NCW",
-                      "activation": None,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256),
+                              "data_initializer": nd.normal,
+                              "channels": 64,
+                              "kernel_size": 3,
+                              "strides": 1,
+                              "padding": 1,
+                              "dilation": 1,
+                              "layout": "NCW",
+                              "activation": None,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -197,21 +197,21 @@ class Conv1DTranspose(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=1, runs=1, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (32, 3, 256),
-                      "data_initializer": nd.normal,
-                      "channels": 64,
-                      "kernel_size": 3,
-                      "strides": 1,
-                      "padding": 1,
-                      "output_padding": 0,
-                      "dilation": 1,
-                      "layout": "NCW",
-                      "activation": None,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256),
+                              "data_initializer": nd.normal,
+                              "channels": 64,
+                              "kernel_size": 3,
+                              "strides": 1,
+                              "padding": 1,
+                              "output_padding": 0,
+                              "dilation": 1,
+                              "layout": "NCW",
+                              "activation": None,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],

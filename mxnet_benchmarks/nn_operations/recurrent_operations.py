@@ -33,19 +33,19 @@ class RNN(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (25, 32, 256),
-                      "data_initializer": nd.normal,
-                      "hidden_size": 100,
-                      "num_layers": 1,
-                      "activation": "relu",
-                      "layout": "TNC",
-                      "dropout": 0,
-                      "bidirectional": False,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (25, 32, 256),
+                              "data_initializer": nd.normal,
+                              "hidden_size": 100,
+                              "num_layers": 1,
+                              "activation": "relu",
+                              "layout": "TNC",
+                              "dropout": 0,
+                              "bidirectional": False,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -84,18 +84,18 @@ class LSTM(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (25, 32, 256),
-                      "data_initializer": nd.normal,
-                      "hidden_size": 100,
-                      "num_layers": 1,
-                      "layout": "TNC",
-                      "dropout": 0,
-                      "bidirectional": False,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (25, 32, 256),
+                              "data_initializer": nd.normal,
+                              "hidden_size": 100,
+                              "num_layers": 1,
+                              "layout": "TNC",
+                              "dropout": 0,
+                              "bidirectional": False,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -133,18 +133,18 @@ class GRU(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (25, 32, 256),
-                      "data_initializer": nd.normal,
-                      "hidden_size": 100,
-                      "num_layers": 1,
-                      "layout": "TNC",
-                      "dropout": 0,
-                      "bidirectional": False,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (25, 32, 256),
+                              "data_initializer": nd.normal,
+                              "hidden_size": 100,
+                              "num_layers": 1,
+                              "layout": "TNC",
+                              "dropout": 0,
+                              "bidirectional": False,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],

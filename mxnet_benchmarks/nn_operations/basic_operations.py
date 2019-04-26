@@ -32,19 +32,19 @@ class Dense(MXNetOperatorBenchmarkBase):
         # Default data is (1, 1024) to mimic an input of batch_size=1 and a sample image of size 512*512.
         # Default number of units 256 is referred from ResNet architecture as commonly used Dense Layer size.
         # Default activation is None because we want to benchmark just dense layer operation.
-        if inputs is None:
-            inputs = {"data": (512, 512),
-                      "units": 256,
-                      "activation": None,
-                      "use_bias": True,
-                      "flatten": True,
-                      "data_initializer": nd.normal,
-                      "weight_initializer": "Xavier",
-                      "bias_initializer": "Zeros",
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (512, 512),
+                              "units": 256,
+                              "activation": None,
+                              "use_bias": True,
+                              "flatten": True,
+                              "data_initializer": nd.normal,
+                              "weight_initializer": "Xavier",
+                              "bias_initializer": "Zeros",
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -82,13 +82,13 @@ class Flatten(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (128, 512, 512) to mimic an input of batch_size=128 and a sample image of size 512*512.
-        if inputs is None:
-            inputs = {"data": (128, 512, 512),
-                      "data_initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (128, 512, 512),
+                              "data_initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -121,13 +121,13 @@ class Lambda(MXNetOperatorBenchmarkBase):
     def __init__(self, ctx=mx.cpu(), warmup=10, runs=50, inputs=None):
         # Set the default Inputs.
         # Default data is (3, 512, 512) to mimic an input image of size 512*512 with 3 channels.
-        if inputs is None:
-            inputs = {"data": (128, 512, 512),
-                      "data_initializer": nd.normal,
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (128, 512, 512),
+                              "data_initializer": nd.normal,
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],

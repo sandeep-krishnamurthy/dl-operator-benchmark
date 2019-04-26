@@ -30,17 +30,17 @@ class MaxPool1D(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (32, 3, 256),
-                      "data_initializer": nd.normal,
-                      "pool_size": 2,
-                      "strides": None,
-                      "padding": 0,
-                      "layout": "NCW",
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256),
+                              "data_initializer": nd.normal,
+                              "pool_size": 2,
+                              "strides": None,
+                              "padding": 0,
+                              "layout": "NCW",
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -75,17 +75,17 @@ class MaxPool2D(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "pool_size": (2, 2),
-                      "strides": None,
-                      "padding": (0, 0),
-                      "layout": "NCHW",
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "pool_size": (2, 2),
+                              "strides": None,
+                              "padding": (0, 0),
+                              "layout": "NCHW",
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -120,17 +120,17 @@ class AvgPool1D(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (32, 3, 256),
-                      "data_initializer": nd.normal,
-                      "pool_size": 2,
-                      "strides": None,
-                      "padding": 0,
-                      "layout": "NCW",
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256),
+                              "data_initializer": nd.normal,
+                              "pool_size": 2,
+                              "strides": None,
+                              "padding": 0,
+                              "layout": "NCW",
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -165,17 +165,17 @@ class AvgPool2D(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "pool_size": (2, 2),
-                      "strides": None,
-                      "padding": (0, 0),
-                      "layout": "NCHW",
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "pool_size": (2, 2),
+                              "strides": None,
+                              "padding": (0, 0),
+                              "layout": "NCHW",
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -208,14 +208,14 @@ class GlobalMaxPool1D(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (32, 3, 256),
-                      "data_initializer": nd.normal,
-                      "layout": "NCW",
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256),
+                              "data_initializer": nd.normal,
+                              "layout": "NCW",
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -245,14 +245,14 @@ class GlobalMaxPool2D(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "layout": "NCHW",
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "layout": "NCHW",
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -282,14 +282,14 @@ class GlobalAvgPool1D(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (32, 3, 256),
-                      "data_initializer": nd.normal,
-                      "layout": "NCW",
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256),
+                              "data_initializer": nd.normal,
+                              "layout": "NCW",
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],
@@ -319,14 +319,14 @@ class GlobalAvgPool2D(MXNetOperatorBenchmarkBase):
 
     def __init__(self, ctx=mx.cpu(), warmup=5, runs=25, inputs=None):
         # Set the default Inputs
-        if inputs is None:
-            inputs = {"data": (32, 3, 256, 256),
-                      "data_initializer": nd.normal,
-                      "layout": "NCHW",
-                      "run_backward": True,
-                      "dtype": "float32"}
+        default_parameters = {"data": (32, 3, 256, 256),
+                              "data_initializer": nd.normal,
+                              "layout": "NCHW",
+                              "run_backward": True,
+                              "dtype": "float32"}
 
-        super().__init__(ctx=ctx, warmup=warmup, runs=runs, inputs=inputs)
+        super().__init__(ctx=ctx, warmup=warmup, runs=runs, default_parameters=default_parameters,
+                         custom_parameters=inputs)
 
         self.data = get_mx_ndarray(ctx=self.ctx, in_tensor=self.inputs["data"],
                                    dtype=self.inputs["dtype"],

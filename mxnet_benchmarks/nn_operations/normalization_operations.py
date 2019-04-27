@@ -96,7 +96,7 @@ class BatchNorm(MXNetOperatorBenchmarkBase):
 # Utilities
 def run_all_gluon_normalization_operations_benchmarks():
     """Helper to run all Gluon Normalization Layer benchmarks. Just runs the benchmarks with default input values.
-    This just a utility to run benchmarks with all default input values.
+    This is just a utility to run benchmarks with all default input values.
 
     :return: list[dict], list of dictionary of benchmark results. Each item in the list is a dictionary of benchmark
                          results per operator.

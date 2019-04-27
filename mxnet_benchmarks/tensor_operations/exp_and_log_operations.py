@@ -84,7 +84,7 @@ class Exp(MXNetOperatorBenchmarkBase):
 # Utilities
 def run_all_exponential_and_log_operations_benchmarks():
     """Helper to run Exponential and Log operator benchmarks. Just runs the benchmarks with default input values.
-    This just a utility to run benchmarks with all default input values.
+    This is just a utility to run benchmarks with all default input values.
 
     :return: list[dict], list of dictionary of benchmark results. Each item in the list is a dictionary of benchmark
                          results per operator.

@@ -1,5 +1,6 @@
 import inspect
 import sys
+import json
 
 from collections import ChainMap
 
@@ -53,3 +54,25 @@ def get_class_members_in_module(module_name):
                                  lambda member: inspect.isclass(member) and member.__module__ == module_name
                                                 and not inspect.isabstract(member))
     return members
+
+
+def save_to_file(inp_dict, out_filepath, format='json'):
+    """Saves the given input dictionary to the given output file.
+
+    By default, saves the input dictionary as JSON file. Other supported formats include:
+    1. md
+    2. csv
+
+    :param inp_dict: Input dictionary to be saved
+    :param out_filepath: Output file path
+    :param format: Format of the output file. Supported options - {json, md, csv}. Default - json.
+
+    """
+    if format == 'json':
+        # Save as JSON
+        with open(out_filepath, "w") as result_file:
+            json.dump(inp_dict, result_file, indent=4)
+    elif format == 'md' or format == 'csv':
+        print("MD / CSV file output format not supported yet! Choose JSON")
+    else:
+        raise ValueError("Invalid output file format provided - '%s'. Supported - json, md, csv".format(format))

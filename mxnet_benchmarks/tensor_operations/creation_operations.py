@@ -217,7 +217,7 @@ class Arange(MXNetOperatorBenchmarkBase):
 
 
 # Utilities
-def run_all_tensor_creation_operations_benchmarks():
+def run_all_tensor_creation_operations_benchmarks(ctx, inputs):
     """Helper to run Exponential and Log operator benchmarks. Just runs the benchmarks with default input values.
     This is just a utility to run benchmarks with all default input values.
 
@@ -231,7 +231,7 @@ def run_all_tensor_creation_operations_benchmarks():
     members = get_class_members_in_module(__name__)
 
     for _, cls in members:
-        benchmark_ref = cls()
+        benchmark_ref = cls(ctx=ctx, inputs=inputs)
         benchmark_ref.run_benchmark()
         benchmark_ref.print_benchmark_results()
         creation_operations_results.append(benchmark_ref.get_benchmark_results())

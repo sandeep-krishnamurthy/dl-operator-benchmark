@@ -101,7 +101,7 @@ class CustomOpElementwiseAdd(MXNetOperatorBenchmarkBase):
 
 
 # Utilities
-def run_customop_operations_benchmarks():
+def run_customop_operations_benchmarks(ctx, inputs):
     """Helper to run all MXNet custom op benchmarks. Just runs the benchmarks with default input values.
     This just a utility to run benchmarks with all default input values.
 
@@ -109,7 +109,7 @@ def run_customop_operations_benchmarks():
     """
     customop_operations_results = []
 
-    benchmark_ref = CustomOpElementwiseAdd()
+    benchmark_ref = CustomOpElementwiseAdd(ctx=ctx, inputs=inputs)
     benchmark_ref.run_benchmark()
     benchmark_ref.print_benchmark_results()
     customop_operations_results.append(benchmark_ref.get_benchmark_results())

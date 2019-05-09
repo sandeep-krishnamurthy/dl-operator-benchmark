@@ -17,7 +17,7 @@ def _parse_mxnet_context(ctx):
         raise ValueError("Invalid context provided - %s. Supported options - cpu, gpu".format(ctx))
 
 
-if __name__ == 'main':
+if __name__ == '__main__':
     # CLI Parser
 
     # 1. GET USER INPUTS
